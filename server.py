@@ -12,10 +12,20 @@ import fastmc.auth
 import fastmc.proto
 
 class Server(object):
+
+    maxPlayers = 64;
+
     def __init__(self):
         self.token = fastmc.auth.generate_challenge_token()
         self.server_id = fastmc.auth.generate_server_id()
         self.key = fastmc.auth.generate_key_pair()
+        loadConfig();
+
+    def loadConfig():
+        with open("config.txt") as f:
+            for line in f:
+                if(line.startswith("Max Players:"))
+                    maxPlayers = line.split(":")[1]
 
     def handle_pkt(self, pkt):
         print pkt
@@ -34,7 +44,7 @@ class Server(object):
                         "protocol": self.reader.protocol.version,
                     },
                     "players": {
-                        "max": 1,
+                        "max": maxPlayers,
                         "online": 0,
                     },  
                     "description": {
