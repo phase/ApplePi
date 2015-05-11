@@ -25,7 +25,7 @@ class Server(object):
         with open("config.txt") as f:
             for line in f:
                 if(line.startswith("Max Players:"))
-                    maxPlayers = line.split(":")[1]
+                    maxPlayers = int(line.split(":")[1])
 
     def handle_pkt(self, pkt):
         print pkt
