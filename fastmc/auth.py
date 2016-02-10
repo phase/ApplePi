@@ -32,6 +32,9 @@ import hashlib
 from uuid import UUID
 from simplejson import dumps as json_dumps
 
+print "If you experience a crash due to Crypto, please do the following!"
+print "goto your lib/site-packages and rename \'crypto\' to \'Crypto\'"
+
 from Crypto.PublicKey import RSA
 from Crypto import Random
 from Crypto.Cipher import AES

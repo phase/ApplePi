@@ -19,13 +19,13 @@ class Server(object):
         self.token = fastmc.auth.generate_challenge_token()
         self.server_id = fastmc.auth.generate_server_id()
         self.key = fastmc.auth.generate_key_pair()
-        loadConfig();
+        self.loadConfig()
 
-    def loadConfig():
+    def loadConfig(self):
         with open("config.txt") as f:
             for line in f:
-                if(line.startswith("Max Players:"))
-                    maxPlayers = int(line.split(":")[1])
+                if(line.startswith("Max Players:")):
+                    self.maxPlayers = int(line.split(":")[1])
 
     def handle_pkt(self, pkt):
         print pkt
@@ -44,7 +44,7 @@ class Server(object):
                         "protocol": self.reader.protocol.version,
                     },
                     "players": {
-                        "max": maxPlayers,
+                        "max": self.maxPlayers,
                         "online": 0,
                     },  
                     "description": {
